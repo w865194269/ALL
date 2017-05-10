@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.schedule.dao.CScheduleDao">
+	
+	<resultMap type="CscheduleBean" id="CScheduleResult">
+		<id column="id" property="id" jdbcType="INTEGER"/>
+		<result column="c_id" property="cId" jdbcType="VARCHAR"/>
+		<result column="t_name" property="name" jdbcType="VARCHAR"/>
+		<result column="c_number" property="classNum" jdbcType="INTEGER"/>
+		<result column="number" property="number" jdbcType="INTEGER"/>
+		<result column="type" property="courseType" jdbcType="VARCHAR"/>
+		<result column="credit" property="credit" jdbcType="VARCHAR"/>
+		<result column="classroom" property="classRoom" jdbcType="VARCHAR"/>
+		<result column="week" property="weeks" jdbcType="VARCHAR"/>
+		<result column="section" property="section" jdbcType="VARCHAR"/>
+		<result column="address" property="address" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<sql id="Base_SQL">
+		 id,c_id,t_name,c_number,number,type,credit,classroom,week,section,address
+	</sql>
+
+	<sql id="INSERT_SQL">
+		 (c_id,t_name,c_number,number,type,credit,classroom,week,section,address)
+	</sql>
+
+	<select id="querySchedule" parameterType="java.lang.String" resultMap="CScheduleResult">
+		SELECT <include refid="Base_SQL"/>
+		FROM t_schedule
+		WHERE 1=1 
+		<if test="_parameter!=null and _parameter!=''">and c_id=#{_parameter}</if>
+	</select>
+
+	<insert id="insertScheduleList" parameterType="java.util.List">
+		INSERT INTO t_schedule <include refid="INSERT_SQL" />
+		VALUES
+		<foreach collection="list" item="c" index="index" separator=",">
+			(
+			#{c.cId,jdbcType=VARCHAR},
+			#{c.name,jdbcType=VARCHAR},
+			#{c.classNum,jdbcType=VARCHAR},
+			#{c.number,jdbcType=VARCHAR},
+			#{c.courseType,jdbcType=VARCHAR},
+			#{c.credit,jdbcType=VARCHAR},
+			#{c.classRoom,jdbcType=VARCHAR},
+			#{c.weeks,jdbcType=VARCHAR},
+			#{c.section,jdbcType=VARCHAR},
+			#{c.address,jdbcType=VARCHAR}
+			)
+		</foreach>
+	
+	</insert>
+
+</mapper>

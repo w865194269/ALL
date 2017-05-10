@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.schedule.dao.UserDao">
+	
+	<resultMap type="UserBean" id="UserResult">
+		<id column="id" property="id"  jdbcType="INTEGER"/>
+		<result column="username" property="name" jdbcType="VARCHAR"/>
+		<result column="account" property="account" jdbcType="VARCHAR"/>
+		<result column="email" property="email" jdbcType="VARCHAR"/>
+		<result column="birthday" property="birthday" jdbcType="TIMESTAMP"/>
+		<result column="password" property="password" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<sql id="Base_SQL">
+		id,username,account,email,birthday,password 
+	</sql>
+	
+	<insert id="addUser"  parameterType="UserBean">
+		INSERT INTO t_user 
+		(username,account,email,birthday,password)
+		VALUES
+		(#{name},#{account},#{email},#{birthday},#{password})		
+	</insert>
+	
+	<select id="getUser" parameterType="UserBean" resultMap="UserResult">
+		SELECT <include refid="Base_SQL" />
+		FROM t_user
+		WHERE account=#{account} 
+		AND 
+		password=#{password}
+	</select>
+</mapper>

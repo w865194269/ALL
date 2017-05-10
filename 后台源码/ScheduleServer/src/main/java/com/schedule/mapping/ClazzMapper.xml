@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.schedule.dao.ClazzDao">
+	
+	<resultMap type="ListBean" id="ListResult">
+		<result column="c_id" property="cId" jdbcType="VARCHAR"/>
+		<result column="c_name" property="name" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<sql id="Base_SQL">
+		c_id,c_name 
+	</sql>
+
+	<sql id="Insert_SQL">
+		(c_id,c_name)
+	</sql>
+
+	<select id="queryAll" resultMap="ListResult">
+		SELECT <include refid="Base_SQL" />
+		FROM t_clazz
+	</select>
+
+
+	<insert id="insertClazzList" parameterType="java.util.List">
+		INSERT INTO t_clazz (c_id,c_name)
+		VALUES
+		<foreach collection="list" item="c" index="index" separator=",">
+			(#{c.cId,jdbcType=VARCHAR},#{c.name,jdbcType=VARCHAR})
+		</foreach>
+	</insert>
+
+<!-- 	<insert id="insertCourse" parameterType="ListBean">
+		INSERT INTO t_clazz (c_id,c_name)
+		VALUES 
+		(#{cId,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR})
+		
+	</insert> -->
+
+
+
+</mapper>

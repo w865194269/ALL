@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.schedule.dao.ImageDao">
+	
+	<resultMap type="ImageBean" id="ImageResult">
+		<result column="id" property="id" jdbcType="VARCHAR"/>
+		<result column="path" property="path" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<sql id="Base_SQL">
+		id,path 
+	</sql>
+
+	<sql id="Insert_SQL">
+		(id,path)
+	</sql>
+
+	<select id="getImagePath" parameterType="java.lang.String" resultMap="ImageResult">
+		SELECT <include refid="Base_SQL" />
+		FROM t_image
+		WHERE 
+		id=#{id}
+	</select>
+
+
+	<insert id="InsertImageInfo" parameterType="ImageBean">
+		INSERT INTO t_image <include refid="Insert_SQL" />
+		VALUES
+		(#{id,jdbcType=VARCHAR},#{path,jdbcType=VARCHAR})
+	</insert>
+		
+
+
+
+</mapper>

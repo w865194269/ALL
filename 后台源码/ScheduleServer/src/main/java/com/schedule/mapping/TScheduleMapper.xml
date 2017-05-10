@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.schedule.dao.TScheduleDao">
+	
+	<resultMap type="TscheduleBean" id="TScheduleResult">
+		<id column="id" property="id" jdbcType="INTEGER"/>
+		<result column="t_id" property="tId" jdbcType="VARCHAR"/>
+		<result column="t_course" property="course" jdbcType="VARCHAR"/>
+		<result column="credit" property="credit" jdbcType="VARCHAR"/>
+		<result column="teachingtype" property="teachingType" jdbcType="VARCHAR"/>
+		<result column="coursetype" property="courseType" jdbcType="VARCHAR"/>
+		<result column="classnum" property="classNum" jdbcType="VARCHAR"/>
+		<result column="classroom" property="classroom" jdbcType="VARCHAR"/>
+		<result column="number" property="number" jdbcType="VARCHAR"/>
+		<result column="time" property="time" jdbcType="VARCHAR"/>
+		<result column="address" property="address" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<sql id="Base_SQL">
+		 id,t_id,t_course,credit,teachingtype,coursetype,classnum,classroom,number,time,address
+	</sql>
+
+	<sql id="INSERT_SQL">
+		 (t_id,t_course,credit,teachingtype,coursetype,classnum,classroom,number,time,address)
+	</sql>
+
+	<select id="querySchedule" parameterType="java.lang.String" resultMap="TScheduleResult">
+		SELECT <include refid="Base_SQL"/>
+		FROM t_teacherschedule
+		WHERE 1=1 
+		<if test="_parameter!=null and _parameter!=''">and t_id=#{_parameter}</if>
+	</select>
+
+	<insert id="insertScheduleList" parameterType="java.util.List">
+		INSERT INTO t_teacherschedule <include refid="INSERT_SQL" />
+		VALUES
+		<foreach collection="list" item="t" index="index" separator=",">
+			(
+			#{t.tId,jdbcType=VARCHAR},
+			#{t.course,jdbcType=VARCHAR},
+			#{t.credit,jdbcType=VARCHAR},
+			#{t.teachingType,jdbcType=VARCHAR},
+			#{t.courseType,jdbcType=VARCHAR},
+			#{t.classNum,jdbcType=VARCHAR},
+			#{t.classroom,jdbcType=VARCHAR},
+			#{t.number,jdbcType=VARCHAR},
+			#{t.time,jdbcType=VARCHAR},
+			#{t.address,jdbcType=VARCHAR}
+			)
+		</foreach>
+	
+	</insert>
+
+</mapper>

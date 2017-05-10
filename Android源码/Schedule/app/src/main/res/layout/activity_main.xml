@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@mipmap/walkthrough_bg"
+    >
+
+    <include layout="@layout/layout_toolbar"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:src="@mipmap/logo"
+        android:layout_height="180dp"
+        android:id="@+id/imageView" />
+
+    <Button
+        android:id="@+id/bt_course"
+        android:layout_width="match_parent"
+        android:text="@string/course_schedule"
+        android:layout_height="wrap_content"
+        />
+    <Button
+        android:id="@+id/bt_teacher"
+        android:layout_width="match_parent"
+        android:text="@string/teacher_schedule"
+        android:layout_height="wrap_content"
+        />
+    <Button
+        android:id="@+id/bt_classroom"
+        android:layout_width="match_parent"
+        android:text="@string/class_schedule"
+        android:layout_height="wrap_content"
+        />
+
+</LinearLayout>

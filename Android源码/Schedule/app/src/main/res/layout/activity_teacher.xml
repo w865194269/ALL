@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <include layout="@layout/layout_head" />
+
+    <ListView
+        android:id="@+id/lv_teacher_schdule"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:divider="@android:color/transparent"
+        android:listSelector="@android:color/transparent"></ListView>
+
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/colorLine"
+        android:layout_height="1dp"/>
+</LinearLayout>
